@@ -1,6 +1,8 @@
 package com.example.diccperso;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -84,6 +86,13 @@ public class Registro extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+		
+	}
+	
+	public void reverso(View view) {
+		
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.reverso.net/"));
+		startActivity(browserIntent);
 		
 	}
 	
