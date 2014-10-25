@@ -11,7 +11,11 @@
     tools:context="com.example.diccperso.MainActivity" >
 
     <Button
+<<<<<<< HEAD
+        android:id="@+id/buttonOk"
+=======
         android:id="@+id/button1"
+>>>>>>> upstream/master
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"

@@ -33,6 +33,17 @@ public final class R {
         public static final int GridLayout1=0x7f090004;
         public static final int LinearLayout1=0x7f090000;
         public static final int action_settings=0x7f09000b;
+<<<<<<< HEAD
+        public static final int button2=0x7f090002;
+        public static final int button3=0x7f090003;
+        public static final int buttonOk=0x7f090001;
+        public static final int editText1=0x7f090005;
+        public static final int editText2=0x7f090008;
+        public static final int imageButton1=0x7f090009;
+        public static final int imageButton2=0x7f090007;
+        public static final int spinner_idiomas=0x7f090006;
+        public static final int spinner_idiomas2=0x7f09000a;
+=======
         public static final int button1=0x7f090001;
         public static final int button2=0x7f090002;
         public static final int button3=0x7f090003;
@@ -42,6 +53,7 @@ public final class R {
         public static final int imageButton2=0x7f090009;
         public static final int spinner_idiomas=0x7f090006;
         public static final int spinner_idiomas2=0x7f090007;
+>>>>>>> upstream/master
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
