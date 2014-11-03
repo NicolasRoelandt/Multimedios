@@ -37,10 +37,24 @@ public class MainActivity extends Activity {
 	
 	
 	
-	public void lanzar(View view) {
+	public void registrar(View view) {
 		
 		Intent i = new Intent (this,Registro.class);
 		startActivity (i);
 		
 	}
+	
+public void revisar(View view) {
+		
+		Intent i = new Intent (this,Revisar.class);
+		startActivity (i);
+		
+	}
+
+public void jugar(View view) {
+	
+	Intent i = new Intent (this,Jugar.class);
+	startActivity (i);
+	
+}
 }
