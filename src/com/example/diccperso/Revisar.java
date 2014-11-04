@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -46,30 +49,24 @@ public class Revisar extends Activity {
      // Define a projection that specifies which columns from the database
      
 
-     // How you want the results sorted in the resulting Cursor
+     
      
       
-        
+       //Donde se guardan las palabras   
         ArrayList<String> list = new ArrayList<String>();
 
         Cursor c = db.rawQuery("SELECT palabra_origen FROM palabras",null);
         
-        int i =0;
+        
+        // So ponen las palabras en list
         if(c.moveToFirst()){
             do{
             	System.out.println(c.getString(0) + " \n");
                list.add(c.getString(0));
-               i++;
             } while (c.moveToNext());
       } c.close();
          
-      //Object products[]= (String[])list.toArray();
-        /*
-        // Listview Data
-        String products[] = {"Hola", "Weon", "Fome", "Flojo", "Cachai?",
-                                "Asado", "Piscola",
-                                "Palta", "Otra palabra", "No tengo más ideas"};
-         */
+     
         lv = (ListView) findViewById(R.id.list_view);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
          
@@ -97,22 +94,24 @@ public class Revisar extends Activity {
                 // TODO Auto-generated method stub                          
             }
         });
-      /*  
+      
         
         lv.setOnItemClickListener(new OnItemClickListener() {
 
         	@Override
-        	public void onItemClick(AdapterView parent, View view,int position, long _id) {
+        	public void onItemClick(AdapterView<?> parent, View view,int position, long _id) {
         	String values = adapter.getItem(position);
 
         	// TODO Auto-generated method stub
-        	Intent i = new Intent (this,Palabra.class);
+        	Intent i = new Intent (Revisar.this,Palabra.class);
     		startActivity (i);
         	}
+
+
         	});
          
     
-    */
+    
     }
     
     @Override
