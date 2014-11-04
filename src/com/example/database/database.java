@@ -9,7 +9,7 @@ public class database extends SQLiteOpenHelper{
 
 		
 		private static final int DATABASE_VERSION = 1;
-	    private static final String DATABASE_NAME = "EarthQuakeDB";
+	    private static final String DATABASE_NAME = "DiccPersoDB";
 	    
 	    private String sqlString = "CREATE TABLE 'palabras' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, " +
 	    												  "'idioma_origen' TEXT, " +

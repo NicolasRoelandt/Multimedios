@@ -2,8 +2,12 @@ package com.example.diccperso;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.database.database;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +20,7 @@ public class Revisar extends Activity {
      
     // List view
     private ListView lv;
+    private database dbInstance;
      
     // Listview Adapter
     ArrayAdapter<String> adapter;
@@ -31,17 +36,45 @@ public class Revisar extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_revisar);
+        
+       
+        
+        dbInstance = new database(this);
+    
+        SQLiteDatabase db = dbInstance.getReadableDatabase();
+
+     // Define a projection that specifies which columns from the database
+     
+
+     // How you want the results sorted in the resulting Cursor
+     
+      
+        
+        ArrayList<String> list = new ArrayList<String>();
+
+        Cursor c = db.rawQuery("SELECT palabra_origen FROM palabras",null);
+        
+        int i =0;
+        if(c.moveToFirst()){
+            do{
+            	System.out.println(c.getString(0) + " \n");
+               list.add(c.getString(0));
+               i++;
+            } while (c.moveToNext());
+      } c.close();
          
+      //Object products[]= (String[])list.toArray();
+        /*
         // Listview Data
         String products[] = {"Hola", "Weon", "Fome", "Flojo", "Cachai?",
                                 "Asado", "Piscola",
                                 "Palta", "Otra palabra", "No tengo más ideas"};
-         
+         */
         lv = (ListView) findViewById(R.id.list_view);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
          
         // Adding items to listview
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, list);
         lv.setAdapter(adapter);
         
         inputSearch.addTextChangedListener(new TextWatcher() {
