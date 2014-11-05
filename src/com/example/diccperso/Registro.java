@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 //import android.widget.TextView; // para guardar idioma spinner
 import android.widget.Toast;
 
@@ -85,6 +86,27 @@ public class Registro extends Activity {
 
 		spinner.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
+		
+		/*
+		 * NICOLAS
+		 
+		Intent myIntent = getIntent();
+		if(myIntent.getStringExtra("idioma_origen") != null)
+				{
+			
+			
+			 String[] names =  {"idioma_origen", "idioma_destino", "palabra_destino", "palabra_origen"};
+			 String[] values = new String[4];
+			
+		for(int i = 0; i<4; i++)
+		{
+			values[i] = myIntent.getStringExtra(names[i]);
+		}
+		text1.setText(values[1]);
+		text2.setText(values[3]);
+		
+				}
+				*/
 		
 		
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {

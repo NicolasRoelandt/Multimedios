@@ -30,6 +30,10 @@ public class Revisar extends Activity {
      
     // Search EditText
     EditText inputSearch;
+    
+    ArrayList<String> list;
+    
+    SQLiteDatabase db;
      
      
     // ArrayList for Listview
@@ -44,7 +48,7 @@ public class Revisar extends Activity {
         
         dbInstance = new database(this);
     
-        SQLiteDatabase db = dbInstance.getReadableDatabase();
+        db = dbInstance.getReadableDatabase();
 
      // Define a projection that specifies which columns from the database
      
@@ -53,7 +57,7 @@ public class Revisar extends Activity {
      
       
        //Donde se guardan las palabras   
-        ArrayList<String> list = new ArrayList<String>();
+        list = new ArrayList<String>();
 
         Cursor c = db.rawQuery("SELECT palabra_origen FROM palabras",null);
         
@@ -103,8 +107,32 @@ public class Revisar extends Activity {
         	String values = adapter.getItem(position);
 
         	// TODO Auto-generated method stub
-        	Intent i = new Intent (Revisar.this,Palabra.class);
-    		startActivity (i);
+        	System.out.println((String)list.get(position));
+        	Intent intent = new Intent (Revisar.this,Palabra.class);
+        	String palabra_origen = list.get(position);
+        	String[]args=new String[]{palabra_origen};
+
+        	
+        	
+        	 Cursor c = db.rawQuery("SELECT* FROM palabras WHERE palabra_origen = ?", args);
+        	 c.moveToFirst();
+        	 for(int i = 1; i<=4; i++)
+        		 System.out.println(c.getString(i) + " \n");
+        	 String idioma_origen = c.getString(1);
+        	 String idioma_destino = c.getString(3);
+        	 String palabra_destino = c.getString(4);
+        	 
+        	 
+        		 
+        	
+        	
+    		
+    		intent.putExtra("idioma_origen",idioma_origen);
+    		intent.putExtra("palabra_origen",palabra_origen);
+    		intent.putExtra("idioma_destino",idioma_destino);
+    		intent.putExtra("palabra_destino",palabra_destino);
+    		startActivity(intent);
+    		
         	}
 
 
@@ -120,5 +148,6 @@ public class Revisar extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+    
      
 }
