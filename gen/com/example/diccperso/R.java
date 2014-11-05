@@ -47,7 +47,7 @@ public final class R {
         public static final int editText2=0x7f09000e;
         public static final int idioma_destino=0x7f090008;
         public static final int idioma_origen=0x7f090007;
-        public static final int imageButton1=0x7f090010;
+        public static final int imageButton1=0x7f09000f;
         public static final int imageButton2=0x7f09000d;
         public static final int imageView1=0x7f090009;
         public static final int inputSearch=0x7f090011;
@@ -56,7 +56,7 @@ public final class R {
         public static final int palabra_origen=0x7f090006;
         public static final int product_name=0x7f090013;
         public static final int spinner_idiomas=0x7f09000c;
-        public static final int spinner_idiomas2=0x7f09000f;
+        public static final int spinner_idiomas2=0x7f090010;
     }
     public static final class layout {
         public static final int activity_jugar=0x7f030000;

@@ -18,24 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 //import android.widget.TextView; // para guardar idioma spinner
 import android.widget.Toast;
 
 
 	
-
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 public class Registro extends Activity {
 
@@ -87,27 +74,6 @@ public class Registro extends Activity {
 		spinner.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
 		
-		/*
-		 * NICOLAS
-		 
-		Intent myIntent = getIntent();
-		if(myIntent.getStringExtra("idioma_origen") != null)
-				{
-			
-			
-			 String[] names =  {"idioma_origen", "idioma_destino", "palabra_destino", "palabra_origen"};
-			 String[] values = new String[4];
-			
-		for(int i = 0; i<4; i++)
-		{
-			values[i] = myIntent.getStringExtra(names[i]);
-		}
-		text1.setText(values[1]);
-		text2.setText(values[3]);
-		
-				}
-				*/
-		
 		
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -133,6 +99,32 @@ public class Registro extends Activity {
 			}
 		});
 		
+		/*
+		 * NICOLAS
+		 * */
+		 
+		Intent myIntent = getIntent();
+		if(myIntent.getStringExtra("idioma_origen") != null)
+				{
+			
+			
+			 String[] names =  {"idioma_origen", "idioma_destino", "palabra_destino", "palabra_origen"};
+			 String[] values = new String[4];
+			
+			 
+		for(int i = 0; i<4; i++)
+		{
+			values[i] = myIntent.getStringExtra(names[i]);
+		}
+		text1.setText(values[3]);
+		text2.setText(values[2]);
+		spinner.setSelection(getIndex(spinner, values[0]));
+		spinner2.setSelection(getIndex(spinner, values[1]));
+		
+		
+				}
+
+
 		spinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -173,7 +165,17 @@ public class Registro extends Activity {
 		});
 	};
 		
-		
+	private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
+}
 	//}
 
 
