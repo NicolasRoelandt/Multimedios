@@ -5,21 +5,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.content.Intent;
-import android.view.View;
-
-public class MainActivity extends Activity {
+public class Jugar extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_jugar);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.jugar, menu);
 		return true;
 	}
 
@@ -34,27 +31,4 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
-	
-	public void registrar(View view) {
-		
-		Intent i = new Intent (this,Registro.class);
-		startActivity (i);
-		
-	}
-	
-public void revisar(View view) {
-		
-		Intent i = new Intent (this,Revisar.class);
-		startActivity (i);
-		
-	}
-
-public void jugar(View view) {
-	
-	Intent i = new Intent (this,Jugar.class);
-	startActivity (i);
-	
-}
 }

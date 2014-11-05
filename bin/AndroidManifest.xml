@@ -26,6 +26,19 @@
             android:name=".Registro"
             android:label="@string/title_activity_registro" >
         </activity>
+        <activity
+            android:name=".Revisar"
+            android:label="@string/title_activity_revisar"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".Jugar"
+            android:label="@string/title_activity_jugar" >
+        </activity>
+        <activity
+            android:name=".Palabra"
+            android:label="@string/title_activity_palabra" >
+        </activity>
     </application>
 
 </manifest>
