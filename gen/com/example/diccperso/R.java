@@ -27,27 +27,36 @@ public final class R {
     public static final class drawable {
         public static final int camera=0x7f020000;
         public static final int drawer_shadow=0x7f020001;
-        public static final int ic_drawer=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int reverso=0x7f020004;
+        public static final int english=0x7f020002;
+        public static final int fleur=0x7f020003;
+        public static final int french=0x7f020004;
+        public static final int ic_drawer=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int reverso=0x7f020007;
+        public static final int spain=0x7f020008;
     }
     public static final class id {
         public static final int GridLayout1=0x7f090004;
         public static final int LinearLayout1=0x7f090000;
-        public static final int action_settings=0x7f09000f;
+        public static final int action_settings=0x7f090014;
         public static final int button1=0x7f090001;
         public static final int button2=0x7f090002;
         public static final int button3=0x7f090003;
-        public static final int buttonOk=0x7f09000a;
-        public static final int editText1=0x7f090005;
-        public static final int editText2=0x7f090008;
-        public static final int imageButton1=0x7f090009;
-        public static final int imageButton2=0x7f090007;
-        public static final int inputSearch=0x7f09000c;
-        public static final int list_view=0x7f09000d;
-        public static final int product_name=0x7f09000e;
-        public static final int spinner_idiomas=0x7f090006;
-        public static final int spinner_idiomas2=0x7f09000b;
+        public static final int buttonOk=0x7f090005;
+        public static final int editText1=0x7f09000b;
+        public static final int editText2=0x7f09000e;
+        public static final int idioma_destino=0x7f090008;
+        public static final int idioma_origen=0x7f090007;
+        public static final int imageButton1=0x7f09000f;
+        public static final int imageButton2=0x7f09000d;
+        public static final int imageView1=0x7f090009;
+        public static final int inputSearch=0x7f090011;
+        public static final int list_view=0x7f090012;
+        public static final int palabra_destino=0x7f09000a;
+        public static final int palabra_origen=0x7f090006;
+        public static final int product_name=0x7f090013;
+        public static final int spinner_idiomas=0x7f09000c;
+        public static final int spinner_idiomas2=0x7f090010;
     }
     public static final class layout {
         public static final int activity_jugar=0x7f030000;
