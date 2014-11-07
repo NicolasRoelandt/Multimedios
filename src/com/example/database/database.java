@@ -13,7 +13,8 @@ public class database extends SQLiteOpenHelper{
 	    
 	    private String sqlString = "CREATE TABLE 'palabras' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, " +
 	    												  "'idioma_origen' TEXT, " +
-	    												  "'palabra_origen' TEXT, " +
+	    												 // "'palabra_origen' TEXT, " +
+	    												  "'palabra_origen' UNIQUE, " +
 	    												  "'idioma_destino' TEXT, " +
 	    												  "'palabra_destino' TEXT)";
 	    

@@ -3,6 +3,7 @@ package com.example.diccperso;
 import com.example.database.*;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -176,14 +177,7 @@ public class Registro extends Activity {
         }
         return index;
 }
-	//}
-
-
 	
-		//});
-		
-//}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -219,20 +213,21 @@ public class Registro extends Activity {
 	public void saveData(String spin1, String txt1, String spin2, String txt2){
 		
 		SQLiteDatabase db = dbInstance.getWritableDatabase();
+		
+			
 		if(db != null){
 			db.beginTransaction();
 			try{
-			    //for(EarthQuakeDataModel model : list){
-					db.execSQL("INSERT INTO palabras (idioma_origen, palabra_origen, idioma_destino, palabra_destino) " +
+					 
+		//		db.insertOrThrow("palabras", null, valor);
+				db.execSQL("INSERT OR REPLACE INTO palabras (idioma_origen, palabra_origen, idioma_destino, palabra_destino) " +
 											"VALUES ('" + spin1 + "', '" + 
 														  txt1 + "', '" + 
 														  spin2 + "', '" + 
 														  txt2 + "')");
-														  /*model.latitude + "', '" + 
-														  model.longitude + "', '" + 
-														  model.dateTime + "', '" + 
-														  model.link + "')");*/
-			   // }
+				
+														  
+			   
 			} finally {
 				db.setTransactionSuccessful();
 			}
@@ -240,7 +235,9 @@ public class Registro extends Activity {
 		    db.close();
 		}
 		Toast.makeText(getApplicationContext(), text1_value + " Guardado!", Toast.LENGTH_SHORT).show();
-		
+
+		Intent intent = new Intent (this,MainActivity.class);
+		startActivity (intent);
 		
 	} 
 	

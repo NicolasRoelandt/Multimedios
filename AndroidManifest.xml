@@ -39,6 +39,10 @@
             android:name=".Palabra"
             android:label="@string/title_activity_palabra" >
         </activity>
+        <activity
+            android:name=".Edicion"
+            android:label="@string/title_activity_edicion" >
+        </activity>
     </application>
 
 </manifest>

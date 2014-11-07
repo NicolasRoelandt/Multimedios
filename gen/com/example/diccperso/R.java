@@ -36,25 +36,28 @@ public final class R {
         public static final int spain=0x7f020008;
     }
     public static final class id {
-        public static final int GridLayout1=0x7f090004;
         public static final int LinearLayout1=0x7f090000;
-        public static final int action_settings=0x7f090014;
+        public static final int RelativeLayout1=0x7f090004;
+        public static final int Space1=0x7f090005;
+        public static final int Space10=0x7f09000f;
+        public static final int Space8=0x7f09000e;
+        public static final int action_settings=0x7f090017;
         public static final int button1=0x7f090001;
         public static final int button2=0x7f090002;
         public static final int button3=0x7f090003;
-        public static final int buttonOk=0x7f090005;
-        public static final int editText1=0x7f09000b;
-        public static final int editText2=0x7f09000e;
-        public static final int idioma_destino=0x7f090008;
+        public static final int buttonOk=0x7f09000b;
+        public static final int editText1=0x7f09000d;
+        public static final int editText2=0x7f090012;
+        public static final int idioma_destino=0x7f09000a;
         public static final int idioma_origen=0x7f090007;
-        public static final int imageButton1=0x7f09000f;
-        public static final int imageButton2=0x7f09000d;
-        public static final int imageView1=0x7f090009;
-        public static final int inputSearch=0x7f090011;
-        public static final int list_view=0x7f090012;
-        public static final int palabra_destino=0x7f09000a;
+        public static final int imageButton1=0x7f090013;
+        public static final int imageButton2=0x7f090011;
+        public static final int imageView1=0x7f090008;
+        public static final int inputSearch=0x7f090014;
+        public static final int list_view=0x7f090015;
+        public static final int palabra_destino=0x7f090009;
         public static final int palabra_origen=0x7f090006;
-        public static final int product_name=0x7f090013;
+        public static final int product_name=0x7f090016;
         public static final int spinner_idiomas=0x7f09000c;
         public static final int spinner_idiomas2=0x7f090010;
     }
@@ -67,12 +70,13 @@ public final class R {
         public static final int list_item=0x7f030005;
     }
     public static final class menu {
-        public static final int global=0x7f080000;
-        public static final int jugar=0x7f080001;
-        public static final int main=0x7f080002;
-        public static final int palabra=0x7f080003;
-        public static final int registro=0x7f080004;
-        public static final int revisar=0x7f080005;
+        public static final int edicion=0x7f080000;
+        public static final int global=0x7f080001;
+        public static final int jugar=0x7f080002;
+        public static final int main=0x7f080003;
+        public static final int palabra=0x7f080004;
+        public static final int registro=0x7f080005;
+        public static final int revisar=0x7f080006;
     }
     public static final class string {
         public static final int action_example=0x7f05000a;
@@ -81,6 +85,7 @@ public final class R {
         public static final int hello_world=0x7f050001;
         public static final int navigation_drawer_close=0x7f050009;
         public static final int navigation_drawer_open=0x7f050008;
+        public static final int title_activity_edicion=0x7f05000d;
         public static final int title_activity_jugar=0x7f05000b;
         public static final int title_activity_palabra=0x7f05000c;
         public static final int title_activity_registro=0x7f050003;

@@ -21,5 +21,6 @@
     <string name="action_example">Example action</string>
     <string name="title_activity_jugar">Jugar</string>
     <string name="title_activity_palabra">Palabra</string>
+    <string name="title_activity_edicion">Edicion</string>
 
 </resources>
