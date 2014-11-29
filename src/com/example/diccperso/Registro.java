@@ -1,13 +1,23 @@
 package com.example.diccperso;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import com.example.database.*;
 
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 //import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +28,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 //import android.widget.TextView; // para guardar idioma spinner
 import android.widget.Toast;
@@ -43,13 +55,22 @@ public class Registro extends Activity {
 		//Base Datos
 		private database dbInstance;
 		
+		
+		private String photo;
+		private String sound;
+		private static final String TAG = "CallCamera";
+		  private static final int CAPTURE_IMAGE_ACTIVITY_REQ = 0;
+
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registro);
 		
+		photo = null;
+		
 		dbInstance = new database (this);
-				
+		
 								//Spinner idiomas
 		
 		// Sppiner 1 y 2
@@ -109,11 +130,11 @@ public class Registro extends Activity {
 				{
 			
 			
-			 String[] names =  {"idioma_origen", "idioma_destino", "palabra_destino", "palabra_origen"};
-			 String[] values = new String[4];
+			 String[] names =  {"idioma_origen", "idioma_destino", "palabra_destino", "palabra_origen", "photo", "sound"};
+			 String[] values = new String[6];
 			
 			 
-		for(int i = 0; i<4; i++)
+		for(int i = 0; i<6; i++)
 		{
 			values[i] = myIntent.getStringExtra(names[i]);
 		}
@@ -121,7 +142,16 @@ public class Registro extends Activity {
 		text2.setText(values[2]);
 		spinner.setSelection(getIndex(spinner, values[0]));
 		spinner2.setSelection(getIndex(spinner, values[1]));
+		photo = values[4];
 		
+		if(photo !=null)
+			{
+			updateButton();
+			}
+			
+		
+		sound = values[5];
+				
 		
 				}
 
@@ -160,7 +190,7 @@ public class Registro extends Activity {
 			
 				//Toast.makeText(getApplicationContext(), " " + text1_value, Toast.LENGTH_SHORT).show();
 				
-				saveData(selectedItem, text1_value, selectedItem2, text2_value);
+				saveData(selectedItem, text1_value, selectedItem2, text2_value, photo, null);
 				} 
 				
 		});
@@ -210,21 +240,24 @@ public class Registro extends Activity {
 	
 	
 	// Insertar valores en base datos
-	public void saveData(String spin1, String txt1, String spin2, String txt2){
+	public void saveData(String spin1, String txt1, String spin2, String txt2, String photo, String sound){
 		
 		SQLiteDatabase db = dbInstance.getWritableDatabase();
+		
 		
 			
 		if(db != null){
 			db.beginTransaction();
 			try{
 					 
-		//		db.insertOrThrow("palabras", null, valor);
-				db.execSQL("INSERT OR REPLACE INTO palabras (idioma_origen, palabra_origen, idioma_destino, palabra_destino) " +
+				//db.insertOrThrow("palabras", null, valor);
+				db.execSQL("INSERT OR REPLACE INTO palabras (idioma_origen, palabra_origen, idioma_destino, palabra_destino, photo, sound) " +
 											"VALUES ('" + spin1 + "', '" + 
 														  txt1 + "', '" + 
 														  spin2 + "', '" + 
-														  txt2 + "')");
+														  txt2 + "', '" + 
+														  photo + "', '" +
+														  sound + "')");
 				
 														  
 			   
@@ -241,5 +274,67 @@ public class Registro extends Activity {
 		
 	} 
 	
+public void camera(View view) {
+
+	 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	 File file = getOutputPhotoFile();
+     photo = file.getAbsolutePath();
+     Uri fileUri = Uri.fromFile(file);
+     i.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+     startActivityForResult(i, CAPTURE_IMAGE_ACTIVITY_REQ );
+	}
+
+private File getOutputPhotoFile() {
+	  File directory = new File(Environment.getExternalStoragePublicDirectory(
+	                Environment.DIRECTORY_PICTURES), getPackageName());
+	  if (!directory.exists()) {
+	    if (!directory.mkdirs()) {
+	      Log.e(TAG, "Failed to create storage directory.");
+	      return null;
+	    }
+	  }
+	  String timeStamp =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
+	  return new File(directory.getPath() + File.separator + "IMG_"  
+	                    + timeStamp + ".jpg");
+	}
+
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	  if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQ) {
+	    if (resultCode == RESULT_OK) {
+	     
+	      if (data == null) {
+	        // A known bug here! The image should have saved in fileUri
+	        Toast.makeText(this, "Image saved successfully", 
+	                       Toast.LENGTH_LONG).show();
+	        
+	      } else {
+	       
+	        Toast.makeText(this, "Image saved successfully in: " + data.getData(), 
+	                       Toast.LENGTH_LONG).show();
+	      }
+	      // showPhoto(photoUri);
+	     updateButton();
+	    } else if (resultCode == RESULT_CANCELED) {
+	      Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+	    } else {
+	      Toast.makeText(this, "Callout for image capture failed!", 
+	                     Toast.LENGTH_LONG).show();
+	    }
+	  }
+}
+	  
+	  public void updateButton()
+	  {
+		  Bitmap myBitmap = BitmapFactory.decodeFile(photo);
+	      ImageButton image = (ImageButton)  findViewById(R.id.cameraButton);
+	      image.setImageBitmap(myBitmap);
+	  }
+	  
+	
+
+
+	
+
+
 
 }

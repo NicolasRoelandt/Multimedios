@@ -34,7 +34,7 @@
         android:layout_width="98dp"
         android:layout_height="38dp"
         android:layout_alignRight="@+id/spinner_idiomas"
-        android:layout_below="@+id/imageButton2"
+        android:layout_below="@+id/cameraButton"
         android:layout_marginTop="55dp" />
 
     <EditText
@@ -51,7 +51,7 @@
         android:id="@+id/imageButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageButton2"
+        android:layout_alignBottom="@+id/cameraButton"
         android:layout_alignLeft="@+id/spinner_idiomas2"
         android:onClick="reverso"
         android:src="@drawable/reverso" />
@@ -64,9 +64,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
         android:text="Ok" />
-
+    
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/cameraButton"
         android:layout_width="89dp"
         android:layout_height="93dp"
         android:layout_alignLeft="@+id/editText2"
@@ -74,6 +74,7 @@
         android:layout_marginTop="71dp"
         android:cropToPadding="false"
         android:scaleType="fitCenter"
+         android:onClick="camera"
         android:src="@drawable/camera" />
 
 </RelativeLayout>

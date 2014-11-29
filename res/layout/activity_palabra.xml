@@ -1,3 +1,4 @@
+ 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
@@ -57,8 +58,8 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_alignLeft="@+id/idioma_origen"
         android:layout_below="@+id/palabra_origen"
         android:layout_marginLeft="34dp"
@@ -86,3 +87,4 @@
         android:text="Edit" />
 
 </RelativeLayout>
+
