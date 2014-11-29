@@ -76,4 +76,32 @@
         android:scaleType="fitCenter"
         android:src="@drawable/camera" />
 
+    <ImageButton
+        android:id="@+id/play_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:onClick="play"
+        android:src="@android:drawable/btn_dialog" />
+
+    <ImageButton
+        android:id="@+id/recordOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner_idiomas"
+        android:layout_marginTop="17dp"
+        android:layout_toLeftOf="@+id/imageButton5"
+        android:onClick="start_recording"
+        android:src="@android:drawable/presence_audio_online" />
+
+    <ImageButton
+        android:id="@+id/recordOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageButton2"
+        android:layout_alignTop="@+id/recordOn"
+        android:onClick="stop_recording"
+        android:src="@android:drawable/presence_audio_busy" />
+
 </RelativeLayout>

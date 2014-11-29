@@ -1,13 +1,20 @@
 package com.example.diccperso;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.example.database.*;
 
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaRecorder;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 //import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,15 +46,25 @@ public class Registro extends Activity {
 		
 		//Boton OK
 		private Button buttonOk;
+		private Button recordOn;
+		private Button recordOff;
 		
 		//Base Datos
 		private database dbInstance;
 		
+		//Grabar audio
+		private MediaRecorder mRecorder = null;
+		private static final String LOG_TAG = "AudioRecordTest";
+	    private static String mFileName = null;
+	    private MediaPlayer   mPlayer = null;
+	    
+	    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registro);
 		
+
 		dbInstance = new database (this);
 				
 								//Spinner idiomas
@@ -71,10 +88,13 @@ public class Registro extends Activity {
 		// Boton OK
 		
 		buttonOk = (Button) findViewById(R.id.buttonOk);
+		
+
 
 		spinner.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
 		
+		//salida audio
 		
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -164,6 +184,7 @@ public class Registro extends Activity {
 				} 
 				
 		});
+		
 	};
 		
 	private int getIndex(Spinner spinner, String myString){
@@ -207,8 +228,78 @@ public class Registro extends Activity {
 		
 	}
 	
+	public void check_folder(){
+		
+		File folder = new File(Environment.getExternalStorageDirectory() + "/diccPerso");
+		boolean success = true;
+		if (!folder.exists()) {
+		    success = folder.mkdir();
+		}
+		if (success) {
+		    // Do something on success
+		} else {
+		    // Do something else on failure 
+		}
+	}
+	//guardar audio
+	public void start_recording(View view){
+
+			//mFileName = Environment.getDataDirectory().getAbsolutePath() + "/text1_value.3gpp";
+			File folder = new File(Environment.getExternalStorageDirectory() + "/diccPerso");
+			check_folder();
+			String fileName = "audio.mp4";
+			
+			mRecorder = new MediaRecorder();
+	        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+	        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+	        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+	        mRecorder.setOutputFile("sdcard/diccPerso/"+fileName);
+     
+
+	        try {	        	
+	        	  mRecorder.prepare();
+	        	  mRecorder.start();
+	        	 } catch (IllegalStateException e) {
+	        	
+	               // start:it is called before prepare()
+	               // prepare: it is called after start() or before setOutputFormat()
+	                  e.printStackTrace();
+	            	       } catch (IOException e) {
+	           	           // prepare() fails
+	        	        	           e.printStackTrace();
+	              	        }
+
+	        Toast.makeText(getApplicationContext(), "Start recording...",Toast.LENGTH_SHORT).show();
+		
+		
+	} 
+		
 	
+	//parar guardar audio
+	public void stop_recording(View view) {
+			 
+			           mRecorder.stop();
+			           mRecorder.release();
+			           mRecorder  = null;
+			           Toast.makeText(getApplicationContext(), "Stop recording...",Toast.LENGTH_SHORT).show();
+			
+
+    }
 	
+	 public void play() {
+	        mPlayer = new MediaPlayer();
+	        try {
+	            mPlayer.setDataSource(mFileName);
+	            mPlayer.prepare();
+	            mPlayer.start();
+		        Toast.makeText(getApplicationContext(), "play...",Toast.LENGTH_SHORT).show();
+
+	        } catch (IOException e) {
+	            Log.e(LOG_TAG, "prepare() failed");
+	        }
+	    }
+	 
+	 
 	// Insertar valores en base datos
 	public void saveData(String spin1, String txt1, String spin2, String txt2){
 		
