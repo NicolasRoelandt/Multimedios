@@ -1,20 +1,36 @@
 package com.example.diccperso;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.media.MediaPlayer;
+
 
 public class Palabra extends Activity {
 	
-	 private String[] names =  {"idioma_origen", "idioma_destino", "palabra_destino", "palabra_origen"};
-	 private String[] values = new String[4];
+	 private String[] names =  {"idioma_origen", "idioma_destino", "palabra_destino", "palabra_origen", "photo", "sound"};
+	 private String[] values = new String[6];
 	 private TextView[] textViews = new TextView[4]; 
-	 
+	 private String sound = null;
+     private MediaPlayer   mPlayer = null;
+     private static final String LOG_TAG = "AudioRecordTest";
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,20 +38,32 @@ public class Palabra extends Activity {
 		setContentView(R.layout.activity_palabra);
 		
 		Intent myIntent = getIntent();
-		for(int i = 0; i<4; i++)
+		for(int i = 0; i<6; i++)
 		{
 			values[i] = myIntent.getStringExtra(names[i]);
 			int resID = getResources().getIdentifier(names[i], "id", "com.example.diccperso");
+			if(i <4)
+			{
 			textViews[i] = (TextView) findViewById(resID);
 			textViews[i].setText(values[i]);
 			//System.out.println(values[i]);
+			}
 		
 		
 		
 		}
+		 
+		sound = values[5];
+				
+		String photo = values[4];
+		if(photo != null)
+		{
+		ImageView image = (ImageView) findViewById(R.id.imageView1);
+		 Bitmap myBitmap = BitmapFactory.decodeFile(photo);
+		 image.setImageBitmap(myBitmap);
+		}
 		
-		
-		
+				
 	}
 
 	@Override
@@ -56,17 +84,31 @@ public class Palabra extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-public void edit(View view) {
+
+	public void audio(View view){
+		
+		String audioFile = Environment.getExternalStorageDirectory().getAbsolutePath()+"/diccPerso/"+sound;
+			 mPlayer = new MediaPlayer();
+	        try {
+	            mPlayer.setDataSource(audioFile);
+	            mPlayer.prepare();
+	            mPlayer.start();
+		        Toast.makeText(getApplicationContext(), "play...",Toast.LENGTH_SHORT).show();
+
+	        } catch (IOException e) {
+	            Log.e(LOG_TAG, "prepare() failed");
+	        }
+	}
+	public void edit(View view) {
 		
 		Intent intent = new Intent (this,Registro.class);
 		
-		for(int i = 0; i<4; i++)
+		for(int i = 0; i<6; i++)
 		{
 		intent.putExtra(names[i],values[i]);
 		}
 		startActivity (intent);
 		
 	
-}
+	}
 }

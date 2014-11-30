@@ -121,6 +121,8 @@ public class Revisar extends Activity {
         	 String idioma_origen = c.getString(1);
         	 String idioma_destino = c.getString(3);
         	 String palabra_destino = c.getString(4);
+        	 String photo = c.getString(5);
+        	 String sound = c.getString(6);
         	 
         	 
         		 
@@ -131,6 +133,8 @@ public class Revisar extends Activity {
     		intent.putExtra("palabra_origen",palabra_origen);
     		intent.putExtra("idioma_destino",idioma_destino);
     		intent.putExtra("palabra_destino",palabra_destino);
+    		intent.putExtra("photo",photo);
+    		intent.putExtra("sound",sound);
     		startActivity(intent);
     		
         	}
