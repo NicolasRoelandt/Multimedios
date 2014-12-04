@@ -84,7 +84,7 @@
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:onClick="play"
-        android:src="@android:drawable/btn_dialog" />
+       android:src="@android:drawable/stat_sys_headset" />
 
     <ImageButton
         android:id="@+id/recordOff"

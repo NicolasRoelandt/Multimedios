@@ -103,6 +103,24 @@ public class Registro extends Activity {
 		   
 		}
 		
+	
+	
+	void setSpinner(Spinner spinner, String language)
+	{
+		
+	    	switch(language){
+	    	case "Spanish" : 
+	    		spinner.setSelection(0);
+	    	    break;
+	    	case "French" : 
+	    		spinner.setSelection(1);
+	    	    break;
+	    	default : 
+	    		spinner.setSelection(2);
+	    	    break;
+	    	} 
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -118,14 +136,9 @@ public class Registro extends Activity {
 		spinner = (Spinner) findViewById(R.id.spinner_idiomas);	
 		spinner2 = (Spinner) findViewById(R.id.spinner_idiomas2);
 		
-		int[] array = getResources().getIntArray(R.array.idiomas);
-        String [] objects = new String[array.length];
-        for(int i = 0; i != array.length; i++){
-            objects[i] = "" + array[i];
-        }
 
-        //spinner.setAdapter(new MyAdapter(Registro.this, R.id.spinner_idiomas, objects)); 
-        //spinner2.setAdapter(new MyAdapter(Registro.this, R.id.spinner_idiomas, objects));
+
+        
         spinner.setAdapter(new LanguageAdapter(Registro.this)); 
         spinner2.setAdapter(new LanguageAdapter(Registro.this)); 
 
@@ -149,36 +162,6 @@ public class Registro extends Activity {
 		
 		
 
-		/*
-		spinner.setAdapter(adapter);
-		spinner2.setAdapter(adapter);
-		
-		
-		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View arg1,
-					int position, long arg3) {
-				// TODO Auto-generated method stub
-				
-				// Comprueba si la posicion la pasa a string
-				//Toast.makeText(parent.getContext(),
-				//	"OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
-				//  Toast.LENGTH_SHORT).show();
-				
-			//String selectedItem = parent.getItemAtPosition(position).toString();
-			//auxi = selectedItem;
-				 selectedItem = parent.getItemAtPosition(position).toString();
-			} 
-
-			
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		}); */
 		
 		/*
 		 * NICOLAS
@@ -199,8 +182,8 @@ public class Registro extends Activity {
 		}
 		text1.setText(values[3]);
 		text2.setText(values[2]);
-		spinner.setSelection(getIndex(spinner, values[0]));
-		spinner2.setSelection(getIndex(spinner, values[1]));
+		setSpinner(spinner, values[0]);
+		setSpinner(spinner2, values[1]);
 		photo = values[4];
 		
 		if(photo !=null)
