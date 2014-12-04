@@ -9,8 +9,10 @@ import com.example.database.*;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.TypedArray;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaRecorder;
 import android.media.MediaPlayer;
@@ -24,11 +26,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 //import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -74,7 +78,9 @@ public class Registro extends Activity {
 		private String sound = null;
 		private static final String TAG = "CallCamera";
 		private static final int CAPTURE_IMAGE_ACTIVITY_REQ = 0;
-
+		
+		//imagenes spinner
+		int total_images[] = { R.drawable.cl, R.drawable.uk, R.drawable.bg};
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +97,23 @@ public class Registro extends Activity {
 		Spinner spinner = (Spinner) findViewById(R.id.spinner_idiomas);	
 		Spinner spinner2 = (Spinner) findViewById(R.id.spinner_idiomas2);
 		
-		// Adaptador para spinner
+		int[] array = getResources().getIntArray(R.array.idiomas);
+        String [] objects = new String[array.length];
+        for(int i = 0; i != array.length; i++){
+            objects[i] = "" + array[i];
+        }
+
+        spinner.setAdapter(new MyAdapter(Registro.this, R.id.spinner_idiomas, objects)); 
+
+    
+		
 		// Adaptador para sppiner
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		        R.array.idiomas, android.R.layout.simple_spinner_item);
+	//	ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+		//        R.array.idiomas, android.R.layout.simple_spinner_item);
+		
 		
 		// Implementacion de spinner y adaptador		
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	//	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
 		// Obtener valores en textos
 		text1   = (EditText)findViewById(R.id.editText1);
@@ -108,11 +124,10 @@ public class Registro extends Activity {
 		buttonOk = (Button) findViewById(R.id.buttonOk);
 		
 
-
+		/*
 		spinner.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
 		
-		//salida audio
 		
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -129,14 +144,16 @@ public class Registro extends Activity {
 			//String selectedItem = parent.getItemAtPosition(position).toString();
 			//auxi = selectedItem;
 				 selectedItem = parent.getItemAtPosition(position).toString();
-			}
+			} 
+
+			
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
 				
 			}
-		});
+		}); */
 		
 		/*
 		 * NICOLAS
@@ -173,7 +190,7 @@ public class Registro extends Activity {
 				}
 
 
-		spinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
+	/*	spinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View arg1,
@@ -195,7 +212,7 @@ public class Registro extends Activity {
 				
 			}
 			
-		});
+		}); */
 		
 		buttonOk.setOnClickListener(new OnClickListener() {
 			 
@@ -233,6 +250,50 @@ public class Registro extends Activity {
 		return true;
 	}
 
+	class MyAdapter extends ArrayAdapter<String>{
+
+        String[] objects;
+        public MyAdapter(Context context, int textViewResourceId,   String[] objects) {
+            super(context, textViewResourceId, objects);
+            this.objects = objects;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            LayoutInflater inflater=getLayoutInflater();
+            View row=inflater.inflate(R.layout.row, parent, false); 
+
+            ImageView icon = (ImageView) row.findViewById(R.id.icon);
+            TypedArray imgs = getResources().obtainTypedArray(R.array.idiomas);
+            icon.setImageResource(imgs.getResourceId(position, -1));
+
+            return row;
+         }
+     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will

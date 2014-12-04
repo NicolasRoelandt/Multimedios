@@ -25,22 +25,25 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int camera=0x7f020000;
-        public static final int drawer_shadow=0x7f020001;
-        public static final int english=0x7f020002;
-        public static final int fleur=0x7f020003;
-        public static final int french=0x7f020004;
-        public static final int ic_drawer=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int reverso=0x7f020007;
-        public static final int spain=0x7f020008;
+        public static final int bg=0x7f020000;
+        public static final int camera=0x7f020001;
+        public static final int cl=0x7f020002;
+        public static final int drawer_shadow=0x7f020003;
+        public static final int english=0x7f020004;
+        public static final int fleur=0x7f020005;
+        public static final int french=0x7f020006;
+        public static final int ic_drawer=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int reverso=0x7f020009;
+        public static final int spain=0x7f02000a;
+        public static final int uk=0x7f02000b;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f090000;
         public static final int Space1=0x7f090005;
         public static final int Space10=0x7f090010;
         public static final int Space8=0x7f09000f;
-        public static final int action_settings=0x7f09001a;
+        public static final int action_settings=0x7f09001e;
         public static final int audio=0x7f090004;
         public static final int button1=0x7f090001;
         public static final int button2=0x7f090002;
@@ -49,20 +52,24 @@ public final class R {
         public static final int cameraButton=0x7f090012;
         public static final int editText1=0x7f09000e;
         public static final int editText2=0x7f090013;
+        public static final int icon=0x7f09001d;
         public static final int idioma_destino=0x7f090007;
         public static final int idioma_origen=0x7f090009;
         public static final int imageButton1=0x7f09000c;
         public static final int imageView1=0x7f09000b;
         public static final int inputSearch=0x7f090017;
+        public static final int left_pic=0x7f090019;
         public static final int list_view=0x7f090018;
         public static final int palabra_destino=0x7f090008;
         public static final int palabra_origen=0x7f09000a;
         public static final int play_record=0x7f090014;
-        public static final int product_name=0x7f090019;
+        public static final int product_name=0x7f09001c;
         public static final int recordOff=0x7f090015;
         public static final int recordOn=0x7f090016;
         public static final int spinner_idiomas=0x7f09000d;
         public static final int spinner_idiomas2=0x7f090011;
+        public static final int sub_text_seen=0x7f09001b;
+        public static final int text_main_seen=0x7f09001a;
     }
     public static final class layout {
         public static final int activity_jugar=0x7f030000;
@@ -70,7 +77,9 @@ public final class R {
         public static final int activity_palabra=0x7f030002;
         public static final int activity_registro=0x7f030003;
         public static final int activity_revisar=0x7f030004;
-        public static final int list_item=0x7f030005;
+        public static final int custom_spinner=0x7f030005;
+        public static final int list_item=0x7f030006;
+        public static final int row=0x7f030007;
     }
     public static final class menu {
         public static final int edicion=0x7f080000;

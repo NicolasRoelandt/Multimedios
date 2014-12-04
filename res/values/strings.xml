@@ -10,6 +10,11 @@
         <item> Español </item>
         <item> English </item>
         <item> Francais </item>
+        
+        <item>@drawable/cl</item>
+        <item>@drawable/uk</item>
+        <item>@drawable/bg</item>
+    
     </string-array>
 
     <string name="title_activity_revisar">Revisar</string>
