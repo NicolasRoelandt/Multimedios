@@ -59,6 +59,11 @@ public class Registro extends Activity {
 		private String text1_value;
 		private String text2_value;
 		
+		//Spinners
+		private Spinner spinner;
+		private Spinner spinner2;
+		
+		
 		//Boton OK
 		private Button buttonOk;
 		private Button recordOn;
@@ -82,6 +87,22 @@ public class Registro extends Activity {
 		//imagenes spinner
 		int total_images[] = { R.drawable.cl, R.drawable.uk, R.drawable.bg};
 		
+
+		String getLanguage(Spinner spinner)
+		{
+		   int i = spinner.getSelectedItemPosition();
+		   switch (i) {
+           case 0:  return "Spanish";
+                    
+           case 1:  return "French";
+                    
+           default:  return "English";
+                    
+		   }
+          
+		   
+		}
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -94,8 +115,8 @@ public class Registro extends Activity {
 								//Spinner idiomas
 		
 		// Sppiner 1 y 2
-		Spinner spinner = (Spinner) findViewById(R.id.spinner_idiomas);	
-		Spinner spinner2 = (Spinner) findViewById(R.id.spinner_idiomas2);
+		spinner = (Spinner) findViewById(R.id.spinner_idiomas);	
+		spinner2 = (Spinner) findViewById(R.id.spinner_idiomas2);
 		
 		int[] array = getResources().getIntArray(R.array.idiomas);
         String [] objects = new String[array.length];
@@ -103,7 +124,10 @@ public class Registro extends Activity {
             objects[i] = "" + array[i];
         }
 
-        spinner.setAdapter(new MyAdapter(Registro.this, R.id.spinner_idiomas, objects)); 
+        //spinner.setAdapter(new MyAdapter(Registro.this, R.id.spinner_idiomas, objects)); 
+        //spinner2.setAdapter(new MyAdapter(Registro.this, R.id.spinner_idiomas, objects));
+        spinner.setAdapter(new LanguageAdapter(Registro.this)); 
+        spinner2.setAdapter(new LanguageAdapter(Registro.this)); 
 
     
 		
@@ -122,6 +146,7 @@ public class Registro extends Activity {
 		// Boton OK
 		
 		buttonOk = (Button) findViewById(R.id.buttonOk);
+		
 		
 
 		/*
@@ -221,10 +246,15 @@ public class Registro extends Activity {
 				// Aqui obtengo los valores de los edit text
 				text1_value = text1.getText().toString();
 				text2_value = text2.getText().toString();
+				String language1 = getLanguage(spinner);
+				String language2 = getLanguage(spinner2);
+
+				
+				
 			
 				//Toast.makeText(getApplicationContext(), " " + text1_value, Toast.LENGTH_SHORT).show();
 				
-				saveData(selectedItem, text1_value, selectedItem2, text2_value, photo, sound);
+				saveData(language1, text1_value, language2, text2_value, photo, sound);
 				} 
 				
 		});

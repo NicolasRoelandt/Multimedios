@@ -35,7 +35,7 @@ public final class R {
         public static final int ic_drawer=0x7f020007;
         public static final int ic_launcher=0x7f020008;
         public static final int reverso=0x7f020009;
-        public static final int spain=0x7f02000a;
+        public static final int spanish=0x7f02000a;
         public static final int uk=0x7f02000b;
     }
     public static final class id {
@@ -48,20 +48,20 @@ public final class R {
         public static final int button1=0x7f090001;
         public static final int button2=0x7f090002;
         public static final int button3=0x7f090003;
-        public static final int buttonOk=0x7f090006;
+        public static final int buttonOk=0x7f09000c;
         public static final int cameraButton=0x7f090012;
         public static final int editText1=0x7f09000e;
         public static final int editText2=0x7f090013;
         public static final int icon=0x7f09001d;
-        public static final int idioma_destino=0x7f090007;
-        public static final int idioma_origen=0x7f090009;
-        public static final int imageButton1=0x7f09000c;
-        public static final int imageView1=0x7f09000b;
+        public static final int imageButton1=0x7f09000b;
+        public static final int imageView1=0x7f090007;
         public static final int inputSearch=0x7f090017;
+        public static final int language1=0x7f090008;
+        public static final int language2=0x7f090009;
         public static final int left_pic=0x7f090019;
         public static final int list_view=0x7f090018;
-        public static final int palabra_destino=0x7f090008;
-        public static final int palabra_origen=0x7f09000a;
+        public static final int palabra_destino=0x7f09000a;
+        public static final int palabra_origen=0x7f090006;
         public static final int play_record=0x7f090014;
         public static final int product_name=0x7f09001c;
         public static final int recordOff=0x7f090015;

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +33,27 @@ public class Palabra extends Activity {
 
 
 
+     
+     Drawable res;
+     void updateImage(ImageView flag, int number)
+     {
+    	if (values[number].equals("Spanish"))
+    	{
+    		res = getResources().getDrawable(R.drawable.cl);
+    	}
+    	else if (values[number].equals("French"))
+    	{
+    		res = getResources().getDrawable(R.drawable.bg);
+    	}
+    	else 
+    	{
+    		res = getResources().getDrawable(R.drawable.uk);
+    	}
+    	flag.setImageDrawable(res);
+    	
+    			
+    	 
+     }
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,7 +64,7 @@ public class Palabra extends Activity {
 		{
 			values[i] = myIntent.getStringExtra(names[i]);
 			int resID = getResources().getIdentifier(names[i], "id", "com.example.diccperso");
-			if(i <4)
+			if(i == 2 || i == 3)
 			{
 			textViews[i] = (TextView) findViewById(resID);
 			textViews[i].setText(values[i]);
@@ -52,6 +74,19 @@ public class Palabra extends Activity {
 		
 		
 		}
+		
+		ImageView flag1 = (ImageView) findViewById(R.id.language1);
+		ImageView flag2 = (ImageView) findViewById(R.id.language2);
+		
+		//languages
+		
+		updateImage(flag1, 0);
+		updateImage(flag2, 1);
+		
+		
+		
+	
+		
 		 
 		sound = values[5];
 				
