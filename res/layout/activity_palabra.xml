@@ -80,10 +80,22 @@
         android:id="@+id/buttonOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/imageButton1"
+        android:layout_alignLeft="@+id/language2"
         android:layout_below="@+id/imageButton1"
-        android:layout_marginTop="37dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="39dp"
         android:onClick="edit"
         android:text="Edit" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonOk"
+        android:layout_alignBottom="@+id/buttonOk"
+        android:layout_marginLeft="41dp"
+        android:layout_toRightOf="@+id/imageButton1"
+        android:onClick="delete"
+        android:text="Delete" />
 
 </RelativeLayout>

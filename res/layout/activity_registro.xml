@@ -47,15 +47,6 @@
         android:imeOptions="actionDone"
         android:inputType="text" />
 
-    <ImageButton
-        android:id="@+id/imageButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cameraButton"
-        android:layout_alignLeft="@+id/spinner_idiomas2"
-        android:onClick="reverso"
-        android:src="@drawable/reverso" />
-
     <Button
         android:id="@+id/buttonOk"
         android:layout_width="wrap_content"
@@ -105,5 +96,15 @@
         android:layout_marginTop="18dp"
         android:onClick="start_recording"
         android:src="@android:drawable/presence_audio_online" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="89dp"
+        android:layout_height="93dp"
+        android:layout_above="@+id/spinner_idiomas2"
+        android:layout_alignRight="@+id/recordOn"
+        android:onClick="reverso"
+        android:scaleType="fitXY"
+        android:src="@drawable/wr" />
 
 </RelativeLayout>

@@ -1,9 +1,13 @@
 package com.example.diccperso;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -21,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.media.MediaPlayer;
 
+import com.example.database.database;
+
 
 public class Palabra extends Activity {
 	
@@ -30,13 +36,15 @@ public class Palabra extends Activity {
 	 private String sound = null;
      private MediaPlayer   mPlayer = null;
      private static final String LOG_TAG = "AudioRecordTest";
+     private database dbInstance; 
+ 	private SQLiteDatabase db;
 
 
 
-     
-     Drawable res;
+ 
      void updateImage(ImageView flag, int number)
      {
+    	 Drawable res;
     	if (values[number].equals("Spanish"))
     	{
     		res = getResources().getDrawable(R.drawable.cl);
@@ -58,6 +66,8 @@ public class Palabra extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_palabra);
+		dbInstance = new database(this);
+		db = dbInstance.getWritableDatabase();
 		
 		Intent myIntent = getIntent();
 		for(int i = 0; i<6; i++)
@@ -144,6 +154,41 @@ public class Palabra extends Activity {
 		}
 		startActivity (intent);
 		
+	
+	}
+	
+public void delete(View view) {
+		
+	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+	    @Override
+	    public void onClick(DialogInterface dialog, int which) {
+	        switch (which){
+	        case DialogInterface.BUTTON_POSITIVE:
+	        	String[]args=new String[]{values[3]};
+	        	db.beginTransaction();
+				try{
+	        	db.execSQL("DELETE FROM palabras WHERE palabra_origen = ?", args);
+				}
+				finally {
+					db.setTransactionSuccessful();
+				}
+
+			db.endTransaction();
+			db.close();
+			
+			onBackPressed();
+	            break;
+
+	        case DialogInterface.BUTTON_NEGATIVE:
+	            //No button clicked
+	            break;
+	        }
+	    }
+	};
+
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	builder.setMessage("Do you really want to delete this word?").setPositiveButton("Yes", dialogClickListener)
+	    .setNegativeButton("No", dialogClickListener).show();
 	
 	}
 }

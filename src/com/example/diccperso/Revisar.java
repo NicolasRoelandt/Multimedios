@@ -65,7 +65,6 @@ public class Revisar extends Activity {
         // So ponen las palabras en list
         if(c.moveToFirst()){
             do{
-            	System.out.println(c.getString(0) + " \n");
                list.add(c.getString(0));
             } while (c.moveToNext());
       } c.close();
@@ -116,8 +115,8 @@ public class Revisar extends Activity {
         	
         	 Cursor c = db.rawQuery("SELECT* FROM palabras WHERE palabra_origen = ?", args);
         	 c.moveToFirst();
-        	 for(int i = 1; i<=4; i++)
-        		 System.out.println(c.getString(i) + " \n");
+  
+        		
         	 String idioma_origen = c.getString(1);
         	 String idioma_destino = c.getString(3);
         	 String palabra_destino = c.getString(4);
@@ -136,6 +135,7 @@ public class Revisar extends Activity {
     		intent.putExtra("photo",photo);
     		intent.putExtra("sound",sound);
     		startActivity(intent);
+    		onBackPressed();
     		
         	}
 
