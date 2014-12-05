@@ -133,6 +133,8 @@ public class Palabra extends Activity {
 	}
 
 	public void audio(View view){
+		if(sound != null && !sound.equals("null"))
+		{
 		
 		String audioFile = Environment.getExternalStorageDirectory().getAbsolutePath()+"/diccPerso/"+sound;
 			 mPlayer = new MediaPlayer();
@@ -145,6 +147,7 @@ public class Palabra extends Activity {
 	        } catch (IOException e) {
 	            Log.e(LOG_TAG, "prepare() failed");
 	        }
+		}
 	}
 	public void edit(View view) {
 		
@@ -155,7 +158,7 @@ public class Palabra extends Activity {
 		intent.putExtra(names[i],values[i]);
 		}
 		startActivity (intent);
-		
+		onBackPressed();
 	
 	}
 	

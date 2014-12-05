@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,8 +31,10 @@ import android.view.LayoutInflater;
 //import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -71,12 +74,14 @@ public class Registro extends Activity {
 
 	//Base Datos
 	private database dbInstance;
+	boolean isRecording;
 
 	//Grabar audio
 	private MediaRecorder mRecorder = null;
 	private static final String LOG_TAG = "AudioRecordTest";
 	//private static String audioFile = null;
 	private MediaPlayer   mPlayer = null;
+	private ImageButton record;
 
 
 	private String photo;
@@ -126,6 +131,8 @@ public class Registro extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registro);
 
+		isRecording = false;
+		record = (ImageButton) findViewById(R.id.record);
 		setTitle("New word");
 		photo = null;
 
@@ -217,8 +224,64 @@ public class Registro extends Activity {
 			} 
 
 		});
+		
+		record.setOnTouchListener(new OnTouchListener() {
+			 
+		     @Override
+		     public boolean onTouch(View v, MotionEvent event) {
+		    	 Drawable res = getResources().getDrawable(android.R.drawable.presence_audio_online);
+					
+		        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+		          
+		        	
+		        	
+		    		
+		    			res = getResources().getDrawable(android.R.drawable.presence_audio_busy);
+		    		//mFileName = Environment.getDataDirectory().getAbsolutePath() + "/text1_value.3gpp";
+		    		String timeStamp =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
 
-	};
+		    		File folder = new File(Environment.getExternalStorageDirectory() + "/diccPerso");
+		    		check_folder();
+		    		//audioFile = timeStamp +".3gpp";
+		    		sound = timeStamp +".3gpp";
+
+		    		mRecorder = new MediaRecorder();
+		    		mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+		    		mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		    		mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+		    		mRecorder.setOutputFile("sdcard/diccPerso/"+sound);
+
+
+		    		try {	        	
+		    			mRecorder.prepare();
+		    			mRecorder.start();
+		    		} catch (IllegalStateException e) {
+
+		    			// start:it is called before prepare()
+		    			// prepare: it is called after start() or before setOutputFormat()
+		    			e.printStackTrace();
+		    		} catch (IOException e) {
+		    			// prepare() fails
+		    			e.printStackTrace();
+		    		}
+
+		    		Toast.makeText(getApplicationContext(), "Start recording...",Toast.LENGTH_SHORT).show();
+		    		
+		        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+		        	res = getResources().getDrawable(android.R.drawable.presence_audio_online);
+
+		    		mRecorder.stop();
+		    		mRecorder.release();
+		    		mRecorder  = null;
+		    		Toast.makeText(getApplicationContext(), "Stop recording...",Toast.LENGTH_SHORT).show();
+		        }
+		        record.setImageDrawable(res);
+		        return true;
+		     }
+		  });
+
+
+	}
 
 	
 
@@ -317,56 +380,14 @@ public class Registro extends Activity {
 			// Do something else on failure 
 		}
 	}
-	//guardar audio
-	public void start_recording(View view){
+	
 
-		//mFileName = Environment.getDataDirectory().getAbsolutePath() + "/text1_value.3gpp";
-		String timeStamp =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
-
-		File folder = new File(Environment.getExternalStorageDirectory() + "/diccPerso");
-		check_folder();
-		//audioFile = timeStamp +".3gpp";
-		sound = timeStamp +".3gpp";
-
-		mRecorder = new MediaRecorder();
-		mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-		mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		mRecorder.setOutputFile("sdcard/diccPerso/"+sound);
-
-
-		try {	        	
-			mRecorder.prepare();
-			mRecorder.start();
-		} catch (IllegalStateException e) {
-
-			// start:it is called before prepare()
-			// prepare: it is called after start() or before setOutputFormat()
-			e.printStackTrace();
-		} catch (IOException e) {
-			// prepare() fails
-			e.printStackTrace();
-		}
-
-		Toast.makeText(getApplicationContext(), "Start recording...",Toast.LENGTH_SHORT).show();
-
-
-	} 
-
-
-	//parar guardar audio
-	public void stop_recording(View view) {
-
-		mRecorder.stop();
-		mRecorder.release();
-		mRecorder  = null;
-		Toast.makeText(getApplicationContext(), "Stop recording...",Toast.LENGTH_SHORT).show();
-
-
-	}
+	
 
 	public void play(View view) {
 
+		if(sound != null && !sound.equals("null"))
+		{
 		String audioFile = Environment.getExternalStorageDirectory().getAbsolutePath()+"/diccPerso/"+sound;
 
 		check_file(audioFile);
@@ -382,7 +403,7 @@ public class Registro extends Activity {
 			Log.e(LOG_TAG, "prepare() failed");
 		}
 
-
+		}
 
 	}
 

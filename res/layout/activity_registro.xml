@@ -78,33 +78,21 @@
        android:src="@android:drawable/stat_sys_headset" />
 
     <ImageButton
-        android:id="@+id/recordOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cameraButton"
-        android:layout_alignTop="@+id/recordOn"
-        android:layout_marginLeft="18dp"
-        android:onClick="stop_recording"
-        android:src="@android:drawable/presence_audio_busy" />
-
-    <ImageButton
-        android:id="@+id/recordOn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/spinner_idiomas"
-        android:layout_below="@+id/spinner_idiomas"
-        android:layout_marginTop="18dp"
-        android:onClick="start_recording"
-        android:src="@android:drawable/presence_audio_online" />
-
-    <ImageButton
         android:id="@+id/imageButton1"
         android:layout_width="89dp"
         android:layout_height="93dp"
         android:layout_above="@+id/spinner_idiomas2"
-        android:layout_alignRight="@+id/recordOn"
         android:onClick="reverso"
         android:scaleType="fitXY"
         android:src="@drawable/wr" />
+
+    <ImageButton
+        android:id="@+id/record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editText1"
+        android:layout_alignRight="@+id/buttonOk"
+        android:onClick="record"
+        android:src="@android:drawable/presence_audio_online" />
 
 </RelativeLayout>

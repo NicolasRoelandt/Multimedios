@@ -7,10 +7,13 @@ import java.util.Random;
 import com.example.database.database;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.KeyEvent;
@@ -34,7 +37,7 @@ public class Jugar extends Activity {
 	private TextView word;
 	private EditText answer;
 	private int score;
-	private TextView scoreText;
+	private TextView scoreText, counter;
 	private ImageView flag1, flag2;
 
 
@@ -87,6 +90,7 @@ public class Jugar extends Activity {
 		answer = (EditText)findViewById(R.id.answer);
 		dbInstance = new database(this);
 		scoreText =  (TextView) findViewById(R.id.score);
+		counter =  (TextView) findViewById(R.id.count);
 		flag1 = (ImageView) findViewById(R.id.flag1);
 		flag2 = (ImageView) findViewById(R.id.flag2);
 
@@ -130,9 +134,9 @@ public class Jugar extends Activity {
 								actionId == EditorInfo.IME_ACTION_DONE ||
 								event.getAction() == KeyEvent.ACTION_DOWN &&
 								event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-							if (!event.isShiftPressed()) {
+							//if (!event.isShiftPressed()) {
 								// the user is done typing. 
-								if (answer.getText().toString().equals(list2.get(value)))
+								if (answer.getText().toString().equalsIgnoreCase(list2.get(value)))
 								{
 									Toast.makeText(getApplicationContext(), "Good!",Toast.LENGTH_SHORT).show();
 									score++;
@@ -145,11 +149,42 @@ public class Jugar extends Activity {
 
 								newWord();
 								return true; // consume.
-							}                
+							//}                
 						}
 						return false; // pass on to other listeners. 
 					}
 				});
+		
+		new CountDownTimer(30000, 1000) {
+
+		     public void onTick(long millisUntilFinished) {
+		         counter.setText(millisUntilFinished / 1000 +" s");
+		     }
+
+		     public void onFinish() {
+		    		
+		    	 counter.setText("0 s");
+		    		DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+		    		    @Override
+		    		    public void onClick(DialogInterface dialog, int which) {
+		    		        switch (which){
+		    		        case DialogInterface.BUTTON_POSITIVE:
+		    		        	
+		    					onBackPressed();
+		    		            break;
+
+		    		        case DialogInterface.BUTTON_NEGATIVE:
+		    		        	recreate();
+		    		            break;
+		    		        }
+		    		    }
+		    		};
+
+		    		AlertDialog.Builder builder = new AlertDialog.Builder(Jugar.this);
+		    		builder.setMessage("Your score : " + score).setPositiveButton("Return to main menu", dialogClickListener)
+		    		    .setNegativeButton("Retry", dialogClickListener).show();
+		     }
+		  }.start();
 
 	}
 

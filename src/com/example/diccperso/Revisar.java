@@ -34,6 +34,7 @@ public class Revisar extends Activity {
     ArrayList<String> list;
     
     SQLiteDatabase db;
+   
      
      
     // ArrayList for Listview
