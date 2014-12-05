@@ -126,6 +126,7 @@ public class Registro extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registro);
 
+		setTitle("New word");
 		photo = null;
 
 		dbInstance = new database (this);
@@ -144,13 +145,7 @@ public class Registro extends Activity {
 
 
 
-		// Adaptador para sppiner
-		//	ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		//        R.array.idiomas, android.R.layout.simple_spinner_item);
-
-
-		// Implementacion de spinner y adaptador		
-		//	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	
 
 		// Obtener valores en textos
 		text1   = (EditText)findViewById(R.id.editText1);
@@ -159,13 +154,11 @@ public class Registro extends Activity {
 		// Boton OK
 
 		buttonOk = (Button) findViewById(R.id.buttonOk);
+		setSpinner(spinner2, "French");
 
 
 
 
-		/*
-		 * NICOLAS
-		 * */
 
 		Intent myIntent = getIntent();
 		if(myIntent.getStringExtra("idioma_origen") != null)
@@ -186,41 +179,24 @@ public class Registro extends Activity {
 			setSpinner(spinner2, values[1]);
 			photo = values[4];
 
-			if(photo !=null)
+			
+			if (!photo.equals("null") && photo != null)
 			{
+			
+			try{
 				updateButton();
+			} catch (Exception e){}
 			}
-
+			
 
 			sound = values[5];
+			
+			setTitle("Edit " + values[3]);
 
 
 		}
 
 
-		/*	spinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View arg1,
-					int position, long arg3) {
-				// TODO Auto-generated method stub
-
-				//String selectedItem2 = parent.getItemAtPosition(position).toString();
-				 selectedItem2 = parent.getItemAtPosition(position).toString();
-
-			}
-
-			//Toast.makeText(getContext(),
-				//"OnItemSelectedListener : " + selectedItem,
-			  //Toast.LENGTH_SHORT).show();
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-		}); */
 
 		buttonOk.setOnClickListener(new OnClickListener() {
 
@@ -235,8 +211,8 @@ public class Registro extends Activity {
 
 
 
-				//Toast.makeText(getApplicationContext(), " " + text1_value, Toast.LENGTH_SHORT).show();
-
+			
+               if(text1_value.length() != 0 && text2_value.length() != 0)
 				saveData(language1, text1_value, language2, text2_value, photo, sound);
 			} 
 
@@ -244,17 +220,7 @@ public class Registro extends Activity {
 
 	};
 
-	private int getIndex(Spinner spinner, String myString){
-
-		int index = 0;
-
-		for (int i=0;i<spinner.getCount();i++){
-			if (spinner.getItemAtPosition(i).equals(myString)){
-				index = i;
-			}
-		}
-		return index;
-	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -280,7 +246,7 @@ public class Registro extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		int p = 9;
+		
 		if (id == R.id.action_settings) {
 			return true;
 		}
@@ -288,7 +254,7 @@ public class Registro extends Activity {
 
 	}
 
-	// Acceder a diccionario reverso
+	// Acceder a WR
 	public void reverso(View view) {
 		String url = "http://www.wordreference.com/";
 
@@ -449,7 +415,7 @@ public class Registro extends Activity {
 			db.endTransaction();
 			db.close();
 		}
-		Toast.makeText(getApplicationContext(), text1_value + " Guardado!", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), text1_value + " saved!", Toast.LENGTH_SHORT).show();
 
 		onBackPressed();
 
@@ -499,7 +465,7 @@ public class Registro extends Activity {
 							Toast.LENGTH_LONG).show();
 				}
 				// showPhoto(photoUri);
-				updateButton();
+				try{updateButton();} catch (Exception e){}
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
 			} else {
@@ -509,11 +475,13 @@ public class Registro extends Activity {
 		}
 	}
 
-	public void updateButton()
+	public void updateButton() throws Exception
 	{
+		
 		Bitmap myBitmap = BitmapFactory.decodeFile(photo);
 		ImageButton image = (ImageButton)  findViewById(R.id.cameraButton);
 		image.setImageBitmap(myBitmap);
+
 	}
 
 

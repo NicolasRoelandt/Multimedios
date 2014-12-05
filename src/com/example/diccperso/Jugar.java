@@ -80,6 +80,8 @@ public class Jugar extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_jugar);
 
+		
+		setTitle("Game 1");
 		rand = new Random();
 		word = (TextView) findViewById(R.id.word);
 		answer = (EditText)findViewById(R.id.answer);
@@ -115,6 +117,10 @@ public class Jugar extends Activity {
 
 		newWord();
 
+		if(list1.size() == 0)
+		{
+			Toast.makeText(getApplicationContext(), "You don't have any word yet",Toast.LENGTH_LONG).show();
+		}
 
 		answer.setOnEditorActionListener(
 				new EditText.OnEditorActionListener() {

@@ -43,7 +43,7 @@ public class Revisar extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_revisar);
-        
+        setTitle("My words");
        
         
         dbInstance = new database(this);
@@ -106,7 +106,7 @@ public class Revisar extends Activity {
         	String values = adapter.getItem(position);
 
         	// TODO Auto-generated method stub
-        	System.out.println((String)list.get(position));
+        	
         	Intent intent = new Intent (Revisar.this,Palabra.class);
         	String palabra_origen = list.get(position);
         	String[]args=new String[]{palabra_origen};

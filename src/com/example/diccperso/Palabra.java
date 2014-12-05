@@ -85,6 +85,8 @@ public class Palabra extends Activity {
 		
 		}
 		
+		setTitle(values[3]);
+		
 		ImageView flag1 = (ImageView) findViewById(R.id.language1);
 		ImageView flag2 = (ImageView) findViewById(R.id.language2);
 		

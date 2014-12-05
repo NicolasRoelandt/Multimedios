@@ -16,20 +16,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:onClick="registrar"
-        android:text="Registrar" />
+        android:text="New word" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="revisar"
-        android:text="Revisar" />
+        android:text="My words" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="jugar"
-        android:text="Jugar" />
+        android:text="Games" />
 
 </LinearLayout>
